@@ -1,0 +1,130 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}Хабарландыру - {{ announcement.title }}{% endblock %}
+{% block link %}
+    <link rel="stylesheet" href="{% static 'css/habar.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Poppins:wght@300;400;600&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+{% endblock %}
+
+{% block content %}
+  <!-- Блок объявления -->
+  <section class="announcement-detail">
+    <div class="announcement-container">
+      <h2 class="announcement-title">{{ announcement.title }}</h2>
+      <div class="announcement-image" onclick="openModal('{% if announcement.image %}{{ announcement.image.url }}{% else %}{% static 'img/placeholder.jpg' %}{% endif %}')">
+        <img src="{% if announcement.image %}{{ announcement.image.url }}{% else %}{% static 'img/placeholder.jpg' %}{% endif %}" alt="{{ announcement.title }}">
+      </div>
+      <div class="announcement-content">
+        <div class="announcement-text">
+          <p>{{ announcement.full_description|default:announcement.description }}</p>
+          {% if announcement.additional_info %}
+            <p>{{ announcement.additional_info }}</p>
+          {% endif %}
+        </div>
+        {% if announcement.image1 or announcement.image2 or announcement.image3 or announcement.image4 or announcement.image5 or announcement.image6 %}
+          <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+              {% if announcement.image1 %}
+                <div class="swiper-slide">
+                  <img src="{{ announcement.image1.url }}" alt="{{ announcement.title }} - Изображение 1" onclick="openModal('{{ announcement.image1.url }}')">
+                </div>
+              {% endif %}
+              {% if announcement.image2 %}
+                <div class="swiper-slide">
+                  <img src="{{ announcement.image2.url }}" alt="{{ announcement.title }} - Изображение 2" onclick="openModal('{{ announcement.image2.url }}')">
+                </div>
+              {% endif %}
+              {% if announcement.image3 %}
+                <div class="swiper-slide">
+                  <img src="{{ announcement.image3.url }}" alt="{{ announcement.title }} - Изображение 3" onclick="openModal('{{ announcement.image3.url }}')">
+                </div>
+              {% endif %}
+              {% if announcement.image4 %}
+                <div class="swiper-slide">
+                  <img src="{{ announcement.image4.url }}" alt="{{ announcement.title }} - Изображение 4" onclick="openModal('{{ announcement.image4.url }}')">
+                </div>
+              {% endif %}
+              {% if announcement.image5 %}
+                <div class="swiper-slide">
+                  <img src="{{ announcement.image5.url }}" alt="{{ announcement.title }} - Изображение 5" onclick="openModal('{{ announcement.image5.url }}')">
+                </div>
+              {% endif %}
+              {% if announcement.image6 %}
+                <div class="swiper-slide">
+                  <img src="{{ announcement.image6.url }}" alt="{{ announcement.title }} - Изображение 6" onclick="openModal('{{ announcement.image6.url }}')">
+                </div>
+              {% endif %}
+            </div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-pagination"></div>
+          </div>
+        {% endif %}
+        <a href="{% url 'home' %}#announcements" class="announcement-button">Басты бетке</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Модальное окно -->
+  <div id="imageModal" class="modal">
+    <span class="modal-close" onclick="closeModal()">×</span>
+    <img class="modal-content" id="modalImage">
+  </div>
+
+  <!-- JavaScript для модального окна и Swiper -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script>
+    // Инициализация Swiper
+    var swiper = new Swiper(".mySwiper", {
+      slidesPerView: 1,
+      spaceBetween: 10,
+      loop: true,
+      autoplay: {
+        delay: 2500,
+        disableOnInteraction: false,
+      },
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+      breakpoints: {
+        768: {
+          slidesPerView: 2,
+          spaceBetween: 20,
+        },
+        1024: {
+          slidesPerView: 3,
+          spaceBetween: 30,
+        },
+      },
+    });
+
+    // Функции для модального окна
+    function openModal(imageSrc) {
+      const modal = document.getElementById('imageModal');
+      const modalImage = document.getElementById('modalImage');
+      modalImage.src = imageSrc;
+      modal.style.display = 'flex';
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('imageModal');
+      modal.style.display = 'none';
+    }
+
+    // Закрытие модального окна при клике вне изображения
+    window.onclick = function(event) {
+      const modal = document.getElementById('imageModal');
+      if (event.target === modal) {
+        closeModal();
+      }
+    }
+  </script>
+{% endblock %}

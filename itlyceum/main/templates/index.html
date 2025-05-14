@@ -1,0 +1,229 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}Шымкент Дарын 1{% endblock %}
+{% block link %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Poppins:wght@300;400;600&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+{% endblock %}
+
+{% block content %}
+  <!-- Swiper -->
+  <section id="hero-slider">
+    <div class="swiper mySwiper">
+      <div class="swiper-wrapper">
+        {% for slide in sliders %}
+          <div class="swiper-slide">
+            {% if slide.image %}
+              <img src="{{ slide.image.url }}" alt="{{ slide.main_title }}">
+            {% else %}
+              <img src="{% static 'img/placeholder.jpg' %}" alt="{{ slide.main_title }}">
+            {% endif %}
+            <div class="hero-text">
+              <h1>{{ slide.main_title }}</h1>
+              <h2>{{ slide.subtitle }}</h2>
+              <p>{{ slide.description }}</p>
+              {% if slide.button_url %}
+                <a href="{{ slide.button_url }}" class="hero-button">{{ slide.button_text }}</a>
+              {% else %}
+                <a href="#" class="hero-button">{{ slide.button_text }}</a>
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-pagination"></div>
+    </div>
+  </section>
+
+  <!-- Блок с объявлениями -->
+  <section id="announcements" class="announcements">
+    <h2 class="announcements-title">Хабарландыру</h2>
+    <div class="announcements-container">
+      {% for announcement in announcements %}
+        <a href="{% url 'habar' announcement.id %}" class="announcement-card">
+          <div class="announcement-image">
+            {% if announcement.image %}
+              <img src="{{ announcement.image.url }}" alt="{{ announcement.title }}">
+            {% else %}
+              <img src="{% static 'img/placeholder.jpg' %}" alt="{{ announcement.title }}">
+            {% endif %}
+          </div>
+          <div class="announcement-content">
+            <h3>{{ announcement.title }}</h3>
+            <p>{{ announcement.description }}</p>
+            <span class="announcement-button">{{ announcement.button_text }}</span>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  </section>
+
+  <!-- Блок "Біз туралы" -->
+  <section id="about-us" class="about-us">
+    <div class="about-us-container">
+      {% if about_us %}
+        <div class="about-us-image">
+          {% if about_us.image %}
+            <img src="{{ about_us.image.url }}" alt="{{ about_us.title }}">
+          {% else %}
+            <img src="{% static 'img/placeholder.jpg' %}" alt="{{ about_us.title }}">
+          {% endif %}
+        </div>
+        <div class="about-us-content">
+          <h2 class="about-us-title">{{ about_us.title }}</h2>
+          <h3 class="about-us-subtitle">{{ about_us.subtitle }}</h3>
+          <p class="about-us-text">{{ about_us.description }}</p>
+          {% if about_us.additional_info %}
+            <p class="about-us-text">{{ about_us.additional_info }}</p>
+          {% endif %}
+          <a href="{% url 'about_us' %}" class="about-us-button">{{ about_us.button_text }}</a>
+        </div>
+      {% endif %}
+    </div>
+  </section>
+
+  <!-- Блок "IT бағыты" -->
+  <section id="it-direction" class="it-direction">
+    <div class="it-direction-container">
+      {% if it_direction %}
+        <h2 class="it-direction-title">{{ it_direction.title }}</h2>
+        <h3 class="it-direction-subtitle">{{ it_direction.subtitle }}</h3>
+        <p class="it-direction-text">{{ it_direction.description }}</p>
+      {% endif %}
+    </div>
+  </section>
+
+  <!-- Блок "IT бағытындағы курстар" -->
+  <section id="it-courses" class="it-courses">
+    <h2 class="it-courses-title">IT бағытындағы курстар</h2>
+    <div class="it-courses-container">
+      {% for course in it_courses %}
+        <a href="{% url 'itb' course.id %}" class="it-course-card">
+          <div class="it-course-content">
+            <h3>{{ course.title }}</h3>
+            <p>{{ course.description }}</p>
+          </div>
+          <div class="it-course-icons">
+            {% for tech in course.technologies.all %}
+              <span class="tech-icon {{ tech.css_class }}">{{ tech.name }}</span>
+            {% endfor %}
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  </section>
+
+  <!-- Блок "Үйірмелер" -->
+  <section id="clubs" class="clubs">
+    <h2 class="clubs-title">Үйірмелер</h2>
+    <div class="clubs-container">
+      {% for club in clubs %}
+        <a href="{% url 'uirme' club.id %}" class="club-card">
+          <div class="club-image">
+            {% if club.image %}
+              <img src="{{ club.image.url }}" alt="{{ club.title }}">
+            {% else %}
+              <img src="{% static 'img/placeholder.jpg' %}" alt="{{ club.title }}">
+            {% endif %}
+          </div>
+          <div class="club-content">
+            <h3>{{ club.title }}</h3>
+            <p>{{ club.description }}</p>
+            <span class="club-button">{{ club.button_text }}</span>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  </section>
+
+  <!-- Блок "Мектептің басқару жүйесі" -->
+  <section id="management-system" class="management-system">
+    <h2 class="management-system-title">Мектептің басқару жүйесі</h2>
+    <div class="management-system-container">
+      {% for member in management_members %}
+        <a href="{% url 'bas' member.id %}" class="management-card">
+          <div class="management-image">
+            {% if member.image %}
+              <img src="{{ member.image.url }}" alt="{{ member.full_name }}">
+            {% else %}
+              <img src="{% static 'img/placeholder.jpg' %}" alt="{{ member.full_name }}">
+            {% endif %}
+          </div>
+          <div class="management-content">
+            <h3>{{ member.position }}</h3>
+            <p>Аты-жөні: {{ member.full_name }}</p>
+            <p class="subtext">{{ member.description }}</p>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  </section>
+
+  <!-- Блок "Байланыс" -->
+  <section id="contact" class="contact">
+    <div class="contact-container">
+      {% if contact %}
+        <div class="contact-info">
+          <h2 class="contact-title">Байланыс</h2>
+          <p>{{ contact.address }}</p>
+          {% if contact.working_hours %}
+            <p>{{ contact.working_hours }}</p>
+          {% endif %}
+          <p>{{ contact.phone }}</p>
+          <p>{{ contact.email }}</p>
+          <div class="contact-socials">
+            {% if contact.instagram_url %}
+              <a href="{{ contact.instagram_url }}"><i class="fab fa-instagram"></i></a>
+            {% endif %}
+            {% if contact.telegram_url %}
+              <a href="{{ contact.telegram_url }}"><i class="fab fa-telegram"></i></a>
+            {% endif %}
+            {% if contact.whatsapp_url %}
+              <a href="{{ contact.whatsapp_url }}"><i class="fab fa-whatsapp"></i></a>
+            {% endif %}
+          </div>
+        </div>
+        <div class="contact-map">
+          {{ contact.map_iframe|safe }}
+        </div>
+      {% endif %}
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      {% if footer %}
+        <p>{{ footer.copyright_text }}</p>
+      {% endif %}
+    </div>
+  </footer>
+
+  <!-- Swiper JS -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+  <!-- Initialize Swiper -->
+  <script>
+    var swiper = new Swiper(".mySwiper", {
+      slidesPerView: 1,
+      loop: true,
+      autoplay: {
+        delay: 2500,
+        disableOnInteraction: false,
+      },
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+    });
+  </script>
+{% endblock %}

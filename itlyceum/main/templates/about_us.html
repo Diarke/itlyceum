@@ -1,0 +1,187 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}О нас - Шымкент Дарын 1{% endblock %}
+{% block link %}
+    <link rel="stylesheet" href="{% static 'css/about_us.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Poppins:wght@300;400;600&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+{% endblock %}
+
+{% block content %}
+  <!-- Блок "О нас" -->
+  <section class="about-us">
+    <div class="about-us-container">
+      {% if about_us %}
+        <div class="about-us-image" onclick="openModal('{% if about_us.image %}{{ about_us.image.url }}{% else %}{% static 'img/placeholder.jpg' %}{% endif %}')">
+          <img src="{% if about_us.image %}{{ about_us.image.url }}{% else %}{% static 'img/placeholder.jpg' %}{% endif %}" alt="{{ about_us.title|default:'О нас' }}">
+        </div>
+        <div class="about-us-content">
+          <h2 class="about-us-title">{{ about_us.title }}</h2>
+          <h3 class="about-us-subtitle">{{ about_us.subtitle }}</h3>
+          <p class="about-us-text">{{ about_us.full_description|default:about_us.description }}</p>
+          {% if about_us.additional_info %}
+            <p class="about-us-text">{{ about_us.additional_info }}</p>
+          {% endif %}
+          {% if about_us.image1 or about_us.image2 or about_us.image3 %}
+            <div class="swiper mySwiper">
+              <div class="swiper-wrapper">
+                {% if about_us.image1 %}
+                  <div class="swiper-slide">
+                    <img src="{{ about_us.image1.url }}" alt="{{ about_us.title }} - Изображение 1" onclick="openModal('{{ about_us.image1.url }}')">
+                  </div>
+                {% endif %}
+                {% if about_us.image2 %}
+                  <div class="swiper-slide">
+                    <img src="{{ about_us.image2.url }}" alt="{{ about_us.title }} - Изображение 2" onclick="openModal('{{ about_us.image2.url }}')">
+                  </div>
+                {% endif %}
+                {% if about_us.image3 %}
+                  <div class="swiper-slide">
+                    <img src="{{ about_us.image3.url }}" alt="{{ about_us.title }} - Изображение 3" onclick="openModal('{{ about_us.image3.url }}')">
+                  </div>
+                {% endif %}
+              </div>
+              <div class="swiper-button-next"></div>
+              <div class="swiper-button-prev"></div>
+              <div class="swiper-pagination"></div>
+            </div>
+          {% endif %}
+          <a href="{% url 'home' %}" class="about-us-button">Басты бетке</a>
+        </div>
+      {% endif %}
+    </div>
+  </section>
+  {% endblock %}
+
+  <!-- Модальное окно -->
+  <div id="imageModal" class="modal">
+    <span class="modal-close" onclick="closeModal()">×</span>
+    <img class="modal-content" id="modalImage">
+  </div>
+
+  <!-- JavaScript для модального окна и Swiper -->
+  <script src="https://cdn.jsdelivr.net" computed_data/0.4s ease;>
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Адаптивность для планшетов */
+@media (max-width: 768px) {
+    .about-us {
+        padding: 40px 10px;
+    }
+
+    .about-us-container {
+        flex-direction: column;
+        padding: 20px;
+        gap: 20px;
+    }
+
+    .about-us-image {
+        min-width: 100%;
+        max-width: 100%;
+        margin-bottom: 15px;
+    }
+
+    .about-us-image img {
+        max-height: 50vh;
+    }
+
+    .about-us-content {
+        min-width: 100%;
+    }
+
+    .about-us-title {
+        font-size: 28px;
+        margin-bottom: 15px;
+    }
+
+    .about-us-subtitle {
+        font-size: 18px;
+        margin-bottom: 15px;
+    }
+
+    .about-us-text {
+        font-size: 15px;
+        line-height: 1.6;
+        padding: 15px;
+    }
+
+    .swiper-slide img {
+        max-height: 35vh;
+    }
+
+    .about-us-button {
+        padding: 10px 30px;
+        font-size: 14px;
+    }
+}
+
+/* Адаптивность для телефонов */
+@media (max-width: 480px) {
+    .about-us {
+        padding: 30px 8px;
+    }
+
+    .about-us-container {
+        padding: 15px;
+        border-radius: 12px;
+    }
+
+    .about-us-title {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+
+    .about-us-subtitle {
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+
+    .about-us-text {
+        font-size: 14px;
+        line-height: 1.5;
+        padding: 12px;
+    }
+
+    .about-us-image {
+        margin-bottom: 10px;
+    }
+
+    .about-us-image img {
+        max-height: 40vh;
+    }
+
+    .swiper {
+        margin-bottom: 15px;
+    }
+
+    .swiper-slide img {
+        max-height: 30vh;
+    }
+
+    .about-us-button {
+        padding: 8px 25px;
+        font-size: 13px;
+    }
+
+    .modal-content {
+        max-width: 90%;
+        max-height: 80vh;
+    }
+
+    .modal-close {
+        font-size: 24px;
+        top: 10px;
+        right: 15px;
+    }
+}

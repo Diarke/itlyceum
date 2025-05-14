@@ -1,0 +1,120 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}Үйірмелер - {{ club.title }}{% endblock %}
+{% block link %}
+    <link rel="stylesheet" href="{% static 'css/uirme.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Poppins:wght@300;400;600&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+{% endblock %}
+
+{% block content %}
+  <!-- Блок клуба -->
+  <section class="club-detail">
+    <div class="club-container">
+      <h2 class="club-title">{{ club.title }}</h2>
+      <div class="club-image" onclick="openModal('{% if club.image %}{{ club.image.url }}{% else %}{% static 'img/placeholder.jpg' %}{% endif %}')">
+        <img src="{% if club.image %}{{ club.image.url }}{% else %}{% static 'img/placeholder.jpg' %}{% endif %}" alt="{{ club.title }}">
+      </div>
+      <div class="club-content">
+        <div class="club-text">
+          <p>{{ club.full_description|default:club.description }}</p>
+          {% if club.additional_info %}
+            <p>{{ club.additional_info }}</p>
+          {% endif %}
+        </div>
+        {% if club.image1 or club.image2 or club.image3 or club.image4 %}
+          <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+              {% if club.image1 %}
+                <div class="swiper-slide">
+                  <img src="{{ club.image1.url }}" alt="{{ club.title }} - Изображение 1" onclick="openModal('{{ club.image1.url }}')">
+                </div>
+              {% endif %}
+              {% if club.image2 %}
+                <div class="swiper-slide">
+                  <img src="{{ club.image2.url }}" alt="{{ club.title }} - Изображение 2" onclick="openModal('{{ club.image2.url }}')">
+                </div>
+              {% endif %}
+              {% if club.image3 %}
+                <div class="swiper-slide">
+                  <img src="{{ club.image3.url }}" alt="{{ club.title }} - Изображение 3" onclick="openModal('{{ club.image3.url }}')">
+                </div>
+              {% endif %}
+              {% if club.image4 %}
+                <div class="swiper-slide">
+                  <img src="{{ club.image4.url }}" alt="{{ club.title }} - Изображение 4" onclick="openModal('{{ club.image4.url }}')">
+                </div>
+              {% endif %}
+            </div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-pagination"></div>
+          </div>
+        {% endif %}
+        <a href="{% url 'home' %}#clubs" class="club-button">Басты бетке</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Модальное окно -->
+  <div id="imageModal" class="modal">
+    <span class="modal-close" onclick="closeModal()">×</span>
+    <img class="modal-content" id="modalImage">
+  </div>
+
+  <!-- JavaScript для модального окна и Swiper -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script>
+    // Инициализация Swiper
+    var swiper = new Swiper(".mySwiper", {
+      slidesPerView: 1,
+      spaceBetween: 10,
+      loop: true,
+      autoplay: {
+        delay: 2500,
+        disableOnInteraction: false,
+      },
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+      breakpoints: {
+        768: {
+          slidesPerView: 2,
+          spaceBetween: 20,
+        },
+        1024: {
+          slidesPerView: 3,
+          spaceBetween: 30,
+        },
+      },
+    });
+
+    // Функции для модального окна
+    function openModal(imageSrc) {
+      const modal = document.getElementById('imageModal');
+      const modalImage = document.getElementById('modalImage');
+      modalImage.src = imageSrc;
+      modal.style.display = 'flex';
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('imageModal');
+      modal.style.display = 'none';
+    }
+
+    // Закрытие модального окна при клике вне изображения
+    window.onclick = function(event) {
+      const modal = document.getElementById('imageModal');
+      if (event.target === modal) {
+        closeModal();
+      }
+    }
+  </script>
+{% endblock %}

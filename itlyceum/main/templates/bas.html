@@ -1,0 +1,112 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}Басқару жүйесі - {{ member.full_name }}{% endblock %}
+{% block link %}
+    <link rel="stylesheet" href="{% static 'css/bas.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Poppins:wght@300;400;600&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+{% endblock %}
+
+{% block content %}
+  <!-- Блок члена управления -->
+  <section class="management-detail">
+    <div class="management-container">
+      <div class="management-image" onclick="openModal('{% if member.image %}{{ member.image.url }}{% else %}{% static 'img/placeholder.jpg' %}{% endif %}')">
+        <img src="{% if member.image %}{{ member.image.url }}{% else %}{% static 'img/placeholder.jpg' %}{% endif %}" alt="{{ member.full_name }}">
+      </div>
+      <div class="management-details">
+        <h2 class="management-title">{{ member.position }}</h2>
+        <div class="management-text">
+          <p><strong>Аты-жөні:</strong> {{ member.full_name }}</p>
+          <p>{{ member.full_description|default:member.description }}</p>
+          {% if member.additional_info %}
+            <p>{{ member.additional_info }}</p>
+          {% endif %}
+        </div>
+        {% if member.image1 or member.image2 or member.image3 %}
+          <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+              {% if member.image1 %}
+                <div class="swiper-slide">
+                  <img src="{{ member.image1.url }}" alt="{{ member.full_name }} - Изображение 1" onclick="openModal('{{ member.image1.url }}')">
+                </div>
+              {% endif %}
+              {% if member.image2 %}
+                <div class="swiper-slide">
+                  <img src="{{ member.image2.url }}" alt="{{ member.full_name }} - Изображение 2" onclick="openModal('{{ member.image2.url }}')">
+                </div>
+              {% endif %}
+              {% if member.image3 %}
+                <div class="swiper-slide">
+                  <img src="{{ member.image3.url }}" alt="{{ member.full_name }} - Изображение 3" onclick="openModal('{{ member.image3.url }}')">
+                </div>
+              {% endif %}
+            </div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-pagination"></div>
+          </div>
+        {% endif %}
+        <a href="{% url 'home' %}#management-system" class="management-button">Басты бетке</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Модальное окно -->
+  <div id="imageModal" class="modal">
+    <span class="modal-close" onclick="closeModal()">×</span>
+    <img class="modal-content" id="modalImage">
+  </div>
+
+  <!-- JavaScript для модального окна и Swiper -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script>
+    // Инициализация Swiper
+    var swiper = new Swiper(".mySwiper", {
+      slidesPerView: 1,
+      spaceBetween: 10,
+      loop: true,
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+      breakpoints: {
+        768: {
+          slidesPerView: 2,
+          spaceBetween: 20,
+        },
+        1024: {
+          slidesPerView: 3,
+          spaceBetween: 30,
+        },
+      },
+    });
+
+    // Функции для модального окна
+    function openModal(imageSrc) {
+      const modal = document.getElementById('imageModal');
+      const modalImage = document.getElementById('modalImage');
+      modalImage.src = imageSrc;
+      modal.style.display = 'flex';
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('imageModal');
+      modal.style.display = 'none';
+    }
+
+    // Закрытие модального окна при клике вне изображения
+    window.onclick = function(event) {
+      const modal = document.getElementById('imageModal');
+      if (event.target === modal) {
+        closeModal();
+      }
+    }
+  </script>
+{% endblock %}

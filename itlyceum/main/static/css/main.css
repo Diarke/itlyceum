@@ -1,0 +1,1804 @@
+/* Подключение красивых шрифтов */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Poppins:wght@300;400;600&display=swap');
+
+/* Общие стили */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Стили для галерей на подстраницах */
+.announcement-gallery, .about-us-gallery, .it-direction-gallery, .it-course-gallery, .club-gallery, .management-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.announcement-gallery img, .about-us-gallery img, .it-direction-gallery img, .it-course-gallery img, .club-gallery img, .management-gallery img {
+    max-width: 200px;
+    height: auto;
+    border-radius: 8px;
+}
+
+/* Стили для контейнеров подстраниц */
+.announcement-container, .about-us-container, .it-direction-container, .it-course-container, .club-container, .management-container {
+    max-width: 1200px;
+    margin: 80px auto 40px;
+    padding: 0 20px;
+}
+
+.announcement-title, .about-us-title, .it-direction-title, .it-course-title, .club-title, .management-title {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.announcement-image, .about-us-image, .it-direction-image, .it-course-image, .club-image, .management-image {
+    margin-bottom: 20px;
+}
+
+.announcement-image img, .about-us-image img, .it-direction-image img, .it-course-image img, .club-image img, .management-image img {
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    aspect-ratio: 4 / 3;
+    object-fit: contain;
+}
+
+/* Учитываем фиксированный хедер */
+.announcement-detail, .about-us, .it-direction, .it-course-detail, .club-detail, .management-detail {
+    margin-top: 80px; /* Высота хедера */
+}
+
+/* Стили для Swiper */
+.swiper {
+    width: 100%;
+    height: calc(100vh - 90px);
+    position: relative;
+}
+
+.swiper-slide {
+    text-align: center;
+    background: #F5F7FA;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(60%);
+    transition: transform 0.5s ease;
+}
+
+.swiper-slide:hover img {
+    transform: scale(1.02);
+}
+
+.swiper {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Стили для текста и кнопки на слайдере */
+.hero-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #FFFFFF;
+    z-index: 10;
+    opacity: 0;
+    animation: fadeIn 1s ease forwards;
+}
+
+.hero-text h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 48px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    line-height: 1.2;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.hero-text h2 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    line-height: 1.2;
+}
+
+.hero-text p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    margin: 5px 0;
+    line-height: 1.5;
+    font-weight: 400;
+}
+
+.hero-text .hero-button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 24px;
+    background-color: #3B82F6;
+    color: #FFFFFF;
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 50px;
+    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.hero-text .hero-button:hover {
+    background-color: #2E3A59;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Анимация для текста слайдера */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -40%);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
+
+/* Стили для навигации и пагинации Swiper */
+.swiper-button-next,
+.swiper-button-prev {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.swiper-pagination-bullet {
+    background: rgba(255, 255, 250, 0.5);
+    opacity: 0.7;
+    width: 10px;
+    height: 10px;
+}
+
+.swiper-pagination-bullet-active {
+    background: #3B82F6;
+    opacity: 1;
+}
+
+/* Стили для блока с объявлениями */
+.announcements {
+    padding: 60px 40px;
+    background: linear-gradient(135deg, #E4E7EB 0%, #F5F7FA 100%);
+    text-align: center;
+}
+
+.announcements-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 40px;
+    font-weight: 700;
+    color: #2E3A59;
+    margin-bottom: 50px;
+    text-transform: uppercase;
+    position: relative;
+}
+
+.announcements-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background-color: #3B82F6;
+    border-radius: 2px;
+}
+
+.announcements-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.announcement-card {
+    width: 400px;
+    background-color: #FFFFFF;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.announcement-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+}
+
+.announcement-image {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    background-color: #93C5FD;
+    position: relative;
+    overflow: hidden;
+}
+
+.announcement-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.announcement-card:hover .announcement-image img {
+    transform: scale(1.1);
+}
+
+.announcement-image img[src=""],
+.announcement-image img:not([src]) {
+    visibility: hidden;
+}
+
+.announcement-content {
+    padding: 20px;
+    text-align: left;
+}
+
+.announcement-content h3 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: #2E3A59;
+    margin-bottom: 10px;
+}
+
+.announcement-content p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    color: #5A6A72;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.announcement-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #3B82F6;
+    color: #FFFFFF;
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 50px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.announcement-card:hover .announcement-button {
+    background-color: #2E3A59;
+    transform: translateY(-2px);
+}
+
+/* Анимация для карточек */
+.announcement-card {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: cardFadeIn 0.5s ease forwards;
+}
+
+.announcement-card:nth-child(1) { animation-delay: 0.1s; }
+.announcement-card:nth-child(2) { animation-delay: 0.2s; }
+.announcement-card:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes cardFadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Стили для блока "Біз туралы" */
+.about-us {
+    padding: 80px 40px;
+    background: linear-gradient(135deg, #E4E7EB 0%, #F5F7FA 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.about-us::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,0V46.29c47.79,22.2,103.59,32.29,158,28,70.36-5.37,136.33-24.29,206.8-25.47,70.47-1.19,138.67,15.34,209.67,22.81,71,7.47,144.33,1.14,216-2.53s142.67-4.81,214-25.47c54.41-15.74,110.21-25.83,158-28V0H0Z" fill="%23F5F7FA"/></svg>') repeat-x;
+    background-size: 1200px 120px;
+}
+
+.about-us-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    max-width: 1100px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+}
+
+.about-us-image {
+    flex: 1;
+    min-width: 300px;
+    max-width: 400px;
+    aspect-ratio: 4 / 3;
+    background-color: #93C5FD;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.about-us-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.about-us-image:hover img {
+    transform: scale(1.05);
+}
+
+.about-us-image img[src=""],
+.about-us-image img:not([src]) {
+    visibility: hidden;
+}
+
+.about-us-image::after {
+    content: '\f549';
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    font-size: 60px;
+    color: #FFFFFF;
+    opacity: 0.5;
+    position: absolute;
+    display: none;
+}
+
+.about-us-image img[src=""] ~ ::after,
+.about-us-image img:not([src]) ~ ::after {
+    display: block;
+}
+
+.about-us-content {
+    flex: 2;
+    min-width: 300px;
+    max-width: 600px;
+    padding: 30px;
+}
+
+.about-us-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: #2E3A59;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    position: relative;
+}
+
+.about-us-title::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background-color: #3B82F6;
+    border-radius: 2px;
+}
+
+.about-us-subtitle {
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: #3B82F6;
+    margin-bottom: 15px;
+    line-height: 1.4;
+}
+
+.about-us-text {
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    color: #5A6A72;
+    line-height: 1.8;
+    margin-bottom: 15px;
+}
+
+.about-us-button {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #3B82F6;
+    color: #FFFFFF;
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 50px;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.about-us-button:hover {
+    background-color: #2E3A59;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Анимация для блока "Біз туралы" */
+.about-us-image,
+.about-us-content {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.7s ease forwards;
+}
+
+.about-us-image { animation-delay: 0.2s; }
+.about-us-content { animation-delay: 0.4s; }
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Стили для блока "IT бағыты" */
+.it-direction {
+    padding: 80px 40px;
+    background: linear-gradient(135deg, #F5F7FA 0%, #E4E7EB 100%);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.it-direction::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,0V46.29c47.79,22.2,103.59,32.29,158,28,70.36-5.37,136.33-24.29,206.8-25.47,70.47-1.19,138.67,15.34,209.67,22.81,71,7.47,144.33,1.14,216-2.53s142.67-4.81,214-25.47c54.41-15.74,110.21-25.83,158-28V0H0Z" fill="%23E4E7EB"/></svg>') repeat-x;
+    background-size: 1200px 120px;
+}
+
+.it-direction-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.it-direction-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 40px;
+    font-weight: 700;
+    color: #2E3A59;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    position: relative;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.7s ease forwards;
+}
+
+.it-direction-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background-color: #3B82F6;
+    border-radius: 2px;
+}
+
+.it-direction-subtitle {
+    font-family: 'Poppins', sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: #3B82F6;
+    margin-bottom: 15px;
+    line-height: 1.4;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.7s ease forwards;
+    animation-delay: 0.2s;
+}
+
+.it-direction-text {
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    color: #5A6A72;
+    line-height: 1.8;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.7s ease forwards;
+    animation-delay: 0.4s;
+}
+
+/* Стили для блока "IT бағытындағы курстар" */
+.it-courses {
+    padding: 80px 40px;
+    background-color: #F5F7FA;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.it-courses::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,0V46.29c47.79,22.2,103.59,32.29,158,28,70.36-5.37,136.33-24.29,206.8-25.47,70.47-1.19,138.67,15.34,209.67,22.81,71,7.47,144.33,1.14,216-2.53s142.67-4.81,214-25.47c54.41-15.74,110.21-25.83,158-28V0H0Z" fill="%23F5F7FA"/></svg>') repeat-x;
+    background-size: 1200px 120px;
+}
+
+.it-courses-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 40px;
+    font-weight: 700;
+    color: #2E3A59;
+    margin-bottom: 50px;
+    text-transform: uppercase;
+    position: relative;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.7s ease forwards;
+}
+
+.it-courses-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background-color: #3B82F6;
+    border-radius: 2px;
+}
+
+.it-courses-container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.it-course-card {
+    width: 360px;
+    background: #FEFEFE;
+    border: 2px solid #B3C7F7;
+    border-radius: 20px;
+    padding: 30px;
+    text-decoration: none;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: cardFadeIn 0.7s ease forwards;
+    position: relative;
+    overflow: hidden;
+}
+
+.it-course-card:nth-child(1) { animation-delay: 0.2s; }
+.it-course-card:nth-child(2) { animation-delay: 0.4s; }
+.it-course-card:nth-child(3) { animation-delay: 0.6s; }
+
+.it-course-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(135deg, #F0F4FF 0%, #E6EFFF 100%);
+}
+
+.it-course-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(to right, #3B82F6, #2E3A59);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.it-course-card:hover::before {
+    opacity: 1;
+}
+
+.it-course-content h3 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: #2E3A59;
+    margin-bottom: 15px;
+    position: relative;
+    z-index: 1;
+}
+
+.it-course-content p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    color: #5A6A72;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.it-course-icons {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+}
+
+.tech-icon {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #3B82F6;
+    color: #FFFFFF;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 20px;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    opacity: 0;
+    transform: scale(0.8);
+    animation: popIn 0.5s ease forwards;
+}
+
+.tech-icon.html { animation-delay: 0.6s; }
+.tech-icon.css { animation-delay: 0.7s; }
+.tech-icon.js { animation-delay: 0.8s; }
+.tech-icon.php { animation-delay: 0.9s; }
+.tech-icon.cpp { animation-delay: 0.6s; }
+.tech-icon.java { animation-delay: 0.7s; }
+.tech-icon.python { animation-delay: 0.8s; }
+.tech-icon.csharp { animation-delay: 0.9s; }
+.tech-icon.lego { animation-delay: 0.6s; }
+.tech-icon.labview { animation-delay: 0.7s; }
+
+.tech-icon:hover {
+    transform: scale(1.1);
+    background-color: #2E3A59;
+}
+
+@keyframes popIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    70% {
+        transform: scale(1.1);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Стили для блока "Үйірмелер" */
+.clubs {
+    padding: 80px 40px;
+    background: linear-gradient(135deg, #F5F7FA 0%, #E4E7EB 100%);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.clubs::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,0V46.29c47.79,22.2,103.59,32.29,158,28,70.36-5.37,136.33-24.29,206.8-25.47,70.47-1.19,138.67,15.34,209.67,22.81,71,7.47,144.33,1.14,216-2.53s142.67-4.81,214-25.47c54.41-15.74,110.21-25.83,158-28V0H0Z" fill="%23E4E7EB"/></svg>') repeat-x;
+    background-size: 1200px 120px;
+}
+
+.clubs-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 40px;
+    font-weight: 700;
+    color: #2E3A59;
+    margin-bottom: 50px;
+    text-transform: uppercase;
+    position: relative;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.7s ease forwards;
+}
+
+.clubs-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background-color: #3B82F6;
+    border-radius: 2px;
+}
+
+.clubs-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.club-card {
+    background: #FFFFFF;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.club-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(135deg, #E4E7EB 0%, #F5F7FA 100%);
+}
+
+.club-image {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    background-color: #93C5FD;
+    overflow: hidden;
+    position: relative;
+}
+
+.club-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.club-card:hover .club-image img {
+    transform: scale(1.1);
+}
+
+.club-image img[src=""],
+.club-image img:not([src]) {
+    visibility: hidden;
+}
+
+.club-content {
+    padding: 20px;
+    text-align: left;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.club-content h3 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: #2E3A59;
+    margin-bottom: 10px;
+}
+
+.club-content p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    color: #5A6A72;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.club-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #3B82F6;
+    color: #FFFFFF;
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 50px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    align-self: flex-start;
+}
+
+.club-card:hover .club-button {
+    background-color: #2E3A59;
+    transform: translateY(-2px);
+}
+
+/* Анимация для карточек клубов */
+.club-card {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: cardFadeIn 0.5s ease forwards;
+}
+
+.club-card:nth-child(1) { animation-delay: 0.1s; }
+.club-card:nth-child(2) { animation-delay: 0.2s; }
+.club-card:nth-child(3) { animation-delay: 0.3s; }
+.club-card:nth-child(4) { animation-delay: 0.4s; }
+
+/* Стили для блока "Мектептің басқару жүйесі" */
+.management-system {
+    padding: 80px 40px;
+    background: linear-gradient(135deg, #F5F7FA 0%, #E4E7EB 100%);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.management-system::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,0V46.29c47.79,22.2,103.59,32.29,158,28,70.36-5.37,136.33-24.29,206.8-25.47,70.47-1.19,138.67,15.34,209.67,22.81,71,7.47,144.33,1.14,216-2.53s142.67-4.81,214-25.47c54.41-15.74,110.21-25.83,158-28V0H0Z" fill="%23F5F7FA"/></svg>') repeat-x;
+    background-size: 1200px 120px;
+}
+
+.management-system-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 40px;
+    font-weight: 700;
+    color: #2E3A59;
+    margin-bottom: 50px;
+    text-transform: uppercase;
+    position: relative;
+}
+
+.management-system-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background-color: #3B82F6;
+    border-radius: 2px;
+}
+
+.management-system-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.management-card {
+    width: 350px;
+    background-color: #FFFFFF;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: block;
+}
+
+.management-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+}
+
+.management-image {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    background-color: #93C5FD;
+    position: relative;
+    overflow: hidden;
+}
+
+.management-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.management-card:hover .management-image img {
+    transform: scale(1.1);
+}
+
+.management-image img[src=""],
+.management-image img:not([src]) {
+    visibility: hidden;
+}
+
+.management-content {
+    padding: 20px;
+    text-align: left;
+}
+
+.management-content h3 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: #2E3A59;
+    margin-bottom: 10px;
+}
+
+.management-content p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    color: #5A6A72;
+    line-height: 1.6;
+    margin-bottom: 5px;
+}
+
+.management-content .subtext {
+    font-size: 13px;
+    color: #3B82F6;
+}
+
+/* Анимация для карточек */
+.management-card {
+    opacity: 0;
+    text-decoration: none;
+    transform: translateY(20px);
+    animation: cardFadeIn 0.5s ease forwards;
+}
+
+.management-card:nth-child(1) { animation-delay: 0.1s; }
+.management-card:nth-child(2) { animation-delay: 0.2s; }
+.management-card:nth-child(3) { animation-delay: 0.3s; }
+
+/* Стили для блока "Байланыс" */
+.contact {
+    padding: 80px 40px;
+    background: linear-gradient(135deg, #E4E7EB 0%, #F5F7FA 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.contact::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,0V46.29c47.79,22.2,103.59,32.29,158,28,70.36-5.37,136.33-24.29,206.8-25.47,70.47-1.19,138.67,15.34,209.67,22.81,71,7.47,144.33,1.14,216-2.53s142.67-4.81,214-25.47c54.41-15.74,110.21-25.83,158-28V0H0Z" fill="%23F5F7FA"/></svg>') repeat-x;
+    background-size: 1200px 120px;
+}
+
+.contact-container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+}
+
+.contact-info {
+    flex: 1;
+    min-width: 300px;
+    max-width: 500px;
+    padding: 30px;
+}
+
+.contact-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: #2E3A59;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    position: relative;
+}
+
+.contact-title::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background-color: #3B82F6;
+    border-radius: 2px;
+}
+
+.contact-info p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    color: #5A6A72;
+    line-height: 1.8;
+    margin-bottom: 15px;
+}
+
+.contact-socials {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.contact-socials a {
+    color: #3B82F6;
+    font-size: 24px;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.contact-socials a:hover {
+    color: #2E3A59;
+    transform: translateY(-3px);
+}
+
+.contact-map {
+    flex: 1;
+    min-width: 300px;
+    max-width: 500px;
+    height: 400px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Анимация для блока "Байланыс" */
+.contact-info,
+.contact-map {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.7s ease forwards;
+}
+
+.contact-info { animation-delay: 0.2s; }
+.contact-map { animation-delay: 0.4s; }
+
+/* Стили для футера */
+.footer {
+    padding: 20px 40px;
+    background-color: #2E3A59;
+    text-align: center;
+}
+
+.footer-content p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    color: #E4E7EB;
+    opacity: 0.8;
+}
+
+/* Адаптивность */
+
+/* Для экранов меньше 1024px (планшеты) */
+@media (max-width: 1024px) {
+    .swiper {
+        height: 70vh;
+        aspect-ratio: 16 / 9;
+    }
+
+    .swiper-slide img {
+        object-fit: cover;
+        min-height: 400px;
+    }
+
+    .hero-text h1 {
+        font-size: 36px;
+    }
+
+    .hero-text h2 {
+        font-size: 20px;
+    }
+
+    .hero-text p {
+        font-size: 16px;
+    }
+
+    .hero-text .hero-button {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+
+    .announcements {
+        padding: 40px 20px;
+    }
+
+    .announcements-title {
+        font-size: 32px;
+    }
+
+    .announcement-card {
+        width: 100%;
+        max-width: 350px;
+    }
+
+    .announcement-image {
+        aspect-ratio: 4 / 3;
+        min-height: 300px;
+    }
+
+    .announcement-image img {
+        object-fit: cover;
+    }
+
+    .about-us {
+        padding: 40px 20px;
+    }
+
+    .about-us-title {
+        font-size: 28px;
+    }
+
+    .about-us-subtitle {
+        font-size: 18px;
+    }
+
+    .about-us-text {
+        font-size: 14px;
+    }
+
+    .about-us-button {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+
+    .about-us-image {
+        max-width: 350px;
+        min-height: 300px;
+    }
+
+    .it-direction {
+        padding: 40px 20px;
+    }
+
+    .it-direction-title {
+        font-size: 32px;
+    }
+
+    .it-direction-subtitle {
+        font-size: 20px;
+    }
+
+    .it-direction-text {
+        font-size: 14px;
+    }
+
+    .it-courses {
+        padding: 40px 20px;
+    }
+
+    .it-courses-title {
+        font-size: 32px;
+    }
+
+    .it-course-card {
+        width: 100%;
+        max-width: 320px;
+    }
+
+    .it-course-content h3 {
+        font-size: 20px;
+    }
+
+    .it-course-content p {
+        font-size: 14px;
+    }
+
+    .clubs {
+        padding: 40px 20px;
+    }
+
+    .clubs-title {
+        font-size: 32px;
+    }
+
+    .clubs-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .club-card {
+        max-width: 320px;
+    }
+
+    .club-image {
+        aspect-ratio: 4 / 3;
+        min-height: 200px;
+    }
+
+    .club-image img {
+        object-fit: cover;
+    }
+
+    .management-system {
+        padding: 40px 20px;
+    }
+
+    .management-system-title {
+        font-size: 32px;
+    }
+
+    .management-card {
+        width: 100%;
+        max-width: 320px;
+    }
+
+    .management-image {
+        aspect-ratio: 4 / 3;
+        min-height: 200px;
+    }
+
+    .management-image img {
+        object-fit: cover;
+    }
+
+    .contact {
+        padding: 40px 20px;
+    }
+
+    .contact-title {
+        font-size: 28px;
+    }
+
+    .contact-info p {
+        font-size: 14px;
+    }
+
+    .contact-map {
+        height: 350px;
+    }
+
+    .footer {
+        padding: 15px 20px;
+    }
+
+    .footer-content p {
+        font-size: 12px;
+    }
+}
+
+/* Для экранов меньше 768px (мобильные устройства) */
+@media (max-width: 768px) {
+    .swiper {
+        height: 50vh;
+        aspect-ratio: 16 / 9;
+    }
+
+    .swiper-slide img {
+        object-fit: cover;
+        min-height: 350px;
+    }
+
+    .hero-text h1 {
+        font-size: 28px;
+    }
+
+    .hero-text h2 {
+        font-size: 18px;
+    }
+
+    .hero-text p {
+        font-size: 14px;
+    }
+
+    .hero-text .hero-button {
+        padding: 8px 16px;
+        font-size: 12px;
+    }
+
+    .swiper-button-next,
+    .swiper-button-prev {
+        display: none;
+    }
+
+    .announcements {
+        padding: 30px 15px;
+    }
+
+    .announcements-title {
+        font-size: 24px;
+    }
+
+    .announcements-title::after {
+        width: 60px;
+    }
+
+    .announcement-card {
+        max-width: 100%;
+    }
+
+    .announcement-image {
+        aspect-ratio: 4 / 3;
+        min-height: 350px;
+    }
+
+    .announcement-image img {
+        object-fit: cover;
+    }
+
+    .announcement-content h3 {
+        font-size: 18px;
+    }
+
+    .announcement-content p {
+        font-size: 13px;
+    }
+
+    .announcement-button {
+        padding: 8px 16px;
+        font-size: 13px;
+    }
+
+    .about-us {
+        padding: 30px 15px;
+    }
+
+    .about-us-container {
+        flex-direction: column;
+    }
+
+    .about-us-image {
+        max-width: 100%;
+        width: 100%;
+        min-height: 350px;
+    }
+
+    .about-us-content {
+        padding: 20px 0;
+    }
+
+    .about-us-title {
+        font-size: 24px;
+    }
+
+    .about-us-subtitle {
+        font-size: 16px;
+    }
+
+    .about-us-text {
+        font-size: 13px;
+    }
+
+    .about-us-button {
+        padding: 8px 16px;
+        font-size: 13px;
+    }
+
+    .it-direction {
+        padding: 30px 15px;
+    }
+
+    .it-direction-title {
+        font-size: 24px;
+    }
+
+    .it-direction-title::after {
+        width: 60px;
+    }
+
+    .it-direction-subtitle {
+        font-size: 18px;
+    }
+
+    .it-direction-text {
+        font-size: 13px;
+    }
+
+    .it-courses {
+        padding: 30px 15px;
+    }
+
+    .it-courses-title {
+        font-size: 24px;
+    }
+
+    .it-courses-title::after {
+        width: 60px;
+    }
+
+    .it-course-card {
+        max-width: 100%;
+    }
+
+    .it-course-content h3 {
+        font-size: 18px;
+    }
+
+    .it-course-content p {
+        font-size: 13px;
+    }
+
+    .tech-icon {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+
+    .clubs {
+        padding: 30px 15px;
+    }
+
+    .clubs-title {
+        font-size: 24px;
+    }
+
+    .clubs-title::after {
+        width: 60px;
+    }
+
+    .clubs-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .club-card {
+        max-width: 100%;
+    }
+
+    .club-image {
+        aspect-ratio: 4 / 3;
+        min-height: 250px;
+    }
+
+    .club-image img {
+        object-fit: cover;
+    }
+
+    .club-content h3 {
+        font-size: 18px;
+    }
+
+    .club-content p {
+        font-size: 13px;
+    }
+
+    .club-button {
+        padding: 8px 16px;
+        font-size: 13px;
+    }
+
+    .management-system {
+        padding: 30px 15px;
+    }
+
+    .management-system-title {
+        font-size: 24px;
+    }
+
+    .management-system-title::after {
+        width: 60px;
+    }
+
+    .management-card {
+        max-width: 100%;
+    }
+
+    .management-image {
+        aspect-ratio: 4 / 3;
+        min-height: 250px;
+    }
+
+    .management-image img {
+        object-fit: cover;
+    }
+
+    .management-content h3 {
+        font-size: 18px;
+    }
+
+    .management-content p {
+        font-size: 13px;
+    }
+
+    .management-content .subtext {
+        font-size: 12px;
+    }
+
+    .contact {
+        padding: 30px 15px;
+    }
+
+    .contact-container {
+        flex-direction: column;
+    }
+
+    .contact-info {
+        padding: 20px 0;
+    }
+
+    .contact-title {
+        font-size: 24px;
+    }
+
+    .contact-info p {
+        font-size: 13px;
+    }
+
+    .contact-socials a {
+        font-size: 20px;
+    }
+
+    .contact-map {
+        max-width: 100%;
+        height: 300px;
+    }
+
+    .footer {
+        padding: 10px 15px;
+    }
+
+    .footer-content p {
+        font-size: 10px;
+    }
+}
+
+/* Для экранов меньше 480px (маленькие мобильные устройства) */
+@media (max-width: 480px) {
+    .swiper {
+        height: 40vh;
+        aspect-ratio: 16 / 9;
+    }
+
+    .swiper-slide img {
+        object-fit: cover;
+        min-height: 300px;
+    }
+
+    .hero-text h1 {
+        font-size: 24px;
+    }
+
+    .hero-text h2 {
+        font-size: 16px;
+    }
+
+    .hero-text p {
+        font-size: 12px;
+    }
+
+    .hero-text .hero-button {
+        padding: 6px 12px;
+        font-size: 10px;
+    }
+
+    .announcements {
+        padding: 20px 10px;
+    }
+
+    .announcements-title {
+        font-size: 20px;
+    }
+
+    .announcements-title::after {
+        width: 50px;
+    }
+
+    .announcement-image {
+        aspect-ratio: 4 / 3;
+        min-height: 300px;
+    }
+
+    .announcement-image img {
+        object-fit: cover;
+    }
+
+    .announcement-content h3 {
+        font-size: 16px;
+    }
+
+    .announcement-content p {
+        font-size: 12px;
+    }
+
+    .announcement-button {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+
+    .about-us {
+        padding: 20px 10px;
+    }
+
+    .about-us-title {
+        font-size: 20px;
+    }
+
+    .about-us-subtitle {
+        font-size: 14px;
+    }
+
+    .about-us-text {
+        font-size: 12px;
+    }
+
+    .about-us-button {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+
+    .about-us-image {
+        min-height: 300px;
+    }
+
+    .it-direction {
+        padding: 20px 10px;
+    }
+
+    .it-direction-title {
+        font-size: 20px;
+    }
+
+    .it-direction-title::after {
+        width: 50px;
+    }
+
+    .it-direction-subtitle {
+        font-size: 16px;
+    }
+
+    .it-direction-text {
+        font-size: 12px;
+    }
+
+    .it-courses {
+        padding: 20px 10px;
+    }
+
+    .it-courses-title {
+        font-size: 20px;
+    }
+
+    .it-courses-title::after {
+        width: 50px;
+    }
+
+    .it-course-content h3 {
+        font-size: 16px;
+    }
+
+    .it-course-content p {
+        font-size: 12px;
+    }
+
+    .tech-icon {
+        padding: 5px 10px;
+        font-size: 10px;
+    }
+
+    .clubs {
+        padding: 20px 10px;
+    }
+
+    .clubs-title {
+        font-size: 20px;
+    }
+
+    .clubs-title::after {
+        width: 50px;
+    }
+
+    .clubs-container {
+        grid-template-columns: 1fr;
+    }
+
+    .club-image {
+        aspect-ratio: 4 / 3;
+        min-height: 200px;
+    }
+
+    .club-image img {
+        object-fit: cover;
+    }
+
+    .club-content h3 {
+        font-size: 16px;
+    }
+
+    .club-content p {
+        font-size: 12px;
+    }
+
+    .club-button {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+
+    .management-system {
+        padding: 20px 10px;
+    }
+
+    .management-system-title {
+        font-size: 20px;
+    }
+
+    .management-system-title::after {
+        width: 50px;
+    }
+
+    .management-image {
+        aspect-ratio: 4 / 3;
+        min-height: 200px;
+    }
+
+    .management-image img {
+        object-fit: cover;
+    }
+
+    .management-content h3 {
+        font-size: 16px;
+    }
+
+    .management-content p {
+        font-size: 12px;
+    }
+
+    .management-content .subtext {
+        font-size: 11px;
+    }
+
+    .contact {
+        padding: 20px 10px;
+    }
+
+    .contact-title {
+        font-size: 20px;
+    }
+
+    .contact-info p {
+        font-size: 12px;
+    }
+
+    .contact-socials a {
+        font-size: 18px;
+    }
+
+    .contact-map {
+        height: 250px;
+    }
+
+    .footer {
+        padding: 10px 10px;
+    }
+
+    .footer-content p {
+        font-size: 10px;
+    }
+}

@@ -1,0 +1,299 @@
+.announcement-detail {
+    padding: 60px 15px;
+    background: linear-gradient(135deg, #F5F7FA 0%, #EAF0F6 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.announcement-container {
+    max-width: 1000px;
+    width: 90%;
+    margin: 0 auto;
+    background: #FFFFFF;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    animation: fadeIn 0.8s ease forwards;
+}
+
+.announcement-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: #1F2A44;
+    text-align: center;
+    margin-bottom: 20px;
+    animation: slideIn 0.6s ease forwards;
+}
+
+.announcement-image {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto 20px;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.announcement-image:hover {
+    transform: scale(1.02);
+}
+
+.announcement-image img {
+    width: 100%;
+    height: auto;
+    max-height: 400px;
+    object-fit: contain;
+    border-radius: 12px;
+}
+
+.announcement-content {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.announcement-text {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 20px;
+    animation: fadeInUp 0.6s ease forwards 0.1s;
+}
+
+.announcement-text p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    color: #4A5568;
+    line-height: 1.7;
+    margin-bottom: 15px;
+}
+
+/* Swiper Styles */
+.swiper {
+    max-width: 900px;
+    margin: 0 auto 20px;
+}
+
+.swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+}
+
+.swiper-slide img {
+    width: 100%;
+    height: auto;
+    max-height: 250px;
+    object-fit: contain;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.swiper-slide img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.announcement-button {
+    display: inline-block;
+    padding: 12px 35px;
+    background: #3B82F6;
+    color: #FFFFFF;
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: background 0.3s ease, transform 0.2s ease;
+    text-align: center;
+    margin: 20px auto 0;
+    display: block;
+    width: fit-content;
+}
+
+.announcement-button:hover {
+    background: #2563EB;
+    transform: translateY(-2px);
+}
+
+/* Стили для модального окна */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+    max-width: 95%;
+    max-height: 85vh;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    color: #FFFFFF;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.modal-close:hover {
+    color: #3B82F6;
+}
+
+/* Анимации */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Адаптивность для планшетов */
+@media (max-width: 768px) {
+    .announcement-detail {
+        padding: 40px 10px;
+        align-items: flex-start;
+    }
+
+    .announcement-container {
+        padding: 20px;
+        max-width: 90%;
+    }
+
+    .announcement-title {
+        font-size: 26px;
+        margin-bottom: 20px;
+        line-height: 1.3;
+    }
+
+    .announcement-text {
+        padding: 15px;
+    }
+
+    .announcement-text p {
+        font-size: 14px;
+        line-height: 1.6;
+        margin-bottom: 12px;
+    }
+
+    .announcement-image {
+        margin-bottom: 15px;
+        max-width: 100%;
+        min-height: 280px;
+    }
+
+    .announcement-image img {
+        max-height: 350px;
+        object-fit: contain;
+    }
+
+    .swiper {
+        max-width: 100%;
+        min-height: 220px;
+    }
+
+    .swiper-slide img {
+        max-height: 250px;
+        object-fit: contain;
+    }
+
+    .announcement-button {
+        padding: 10px 25px;
+        font-size: 14px;
+    }
+}
+
+/* Адаптивность для телефонов */
+@media (max-width: 480px) {
+    .announcement-detail {
+        padding: 20px 8px;
+        align-items: flex-start;
+    }
+
+    .announcement-container {
+        padding: 15px;
+        border-radius: 12px;
+        max-width: 95%;
+    }
+
+    .announcement-title {
+        font-size: 22px;
+        margin-bottom: 15px;
+        line-height: 1.4;
+    }
+
+    .announcement-text {
+        padding: 12px;
+    }
+
+    .announcement-text p {
+        font-size: 13px;
+        line-height: 1.5;
+        margin-bottom: 10px;
+    }
+
+    .announcement-image {
+        margin-bottom: 10px;
+        max-width: 100%;
+        min-height: 220px;
+    }
+
+    .announcement-image img {
+        max-height: 300px;
+        object-fit: contain;
+    }
+
+    .swiper {
+        margin-bottom: 15px;
+        max-width: 100%;
+        min-height: 180px;
+    }
+
+    .swiper-slide img {
+        max-height: 200px;
+        object-fit: contain;
+    }
+
+    .announcement-button {
+        padding: 8px 20px;
+        font-size: 13px;
+    }
+
+    .modal-content {
+        max-width: 90%;
+        max-height: 80vh;
+    }
+
+    .modal-close {
+        font-size: 22px;
+        top: 8px;
+        right: 12px;
+    }
+}

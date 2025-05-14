@@ -1,0 +1,80 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!-- Подключение Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="shortcut icon" href="{% static 'img/it-lyceum.png' %}" type="image/x-icon">
+    {% block link %}{% endblock %}
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <a href="{% url 'home' %}">
+                    <img src="{% static 'img/it-lyceum.png' %}" alt="Logo" class="logo-img">
+                </a>
+            </div>
+            <nav class="nav-menu">
+                <a href="{% if request.path == '/' %}#announcements{% else %}{% url 'home' %}#announcements{% endif %}">Хабарландыру</a>
+                <a href="{% if request.path == '/' %}#about-us{% else %}{% url 'home' %}#about-us{% endif %}">Біз туралы</a>
+                <a href="{% if request.path == '/' %}#it-direction{% else %}{% url 'home' %}#it-direction{% endif %}">IT бағыты</a>
+                <a href="{% if request.path == '/' %}#it-courses{% else %}{% url 'home' %}#it-courses{% endif %}">IT курстары</a>
+                <a href="{% if request.path == '/' %}#clubs{% else %}{% url 'home' %}#clubs{% endif %}">Үйірмелер</a>
+                <a href="{% if request.path == '/' %}#management-system{% else %}{% url 'home' %}#management-system{% endif %}">Басқару жүйесі</a>
+                <a href="{% if request.path == '/' %}#contact{% else %}{% url 'home' %}#contact{% endif %}">Байланыс</a>
+            </nav>
+            <div class="social-icons">
+                <a href="{% if request.path == '/' %}#contact{% else %}{% url 'home' %}#contact{% endif %}" class="address"><i class="fas fa-map-marker-alt"></i> Ғ.Орманов 13A</a>
+                <a href="{% if request.path == '/' %}#contact{% else %}{% url 'home' %}#contact{% endif %}"><i class="fab fa-instagram"></i></a>
+                <a href="{% if request.path == '/' %}#contact{% else %}{% url 'home' %}#contact{% endif %}"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            <div class="burger-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    <script>
+        // Burger menu toggle
+        const burgerMenu = document.querySelector('.burger-menu');
+        const navMenu = document.querySelector('.nav-menu');
+    
+        burgerMenu.addEventListener('click', function() {
+            this.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+    
+        // Smooth scrolling for navigation links and social icons on the homepage
+        document.querySelectorAll('.nav-menu a[href*="#"], .social-icons a[href*="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href.startsWith('#') && window.location.pathname === '/') {
+                    e.preventDefault();
+                    const targetId = href.substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                    // Close burger menu if open
+                    if (navMenu.classList.contains('active')) {
+                        burgerMenu.classList.remove('active');
+                        navMenu.classList.remove('active');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

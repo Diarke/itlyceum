@@ -1,0 +1,125 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}IT Курсы - {{ course.title }}{% endblock %}
+{% block link %}
+    <link rel="stylesheet" href="{% static 'css/itb.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Poppins:wght@300;400;600&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+{% endblock %}
+
+{% block content %}
+  <!-- Блок IT курса -->
+  <section class="it-course-detail">
+    <div class="it-course-container">
+      <h2 class="it-course-title">{{ course.title }}</h2>
+      <div class="it-course-image" onclick="openModal('{% if course.image %}{{ course.image.url }}{% else %}{% static 'img/placeholder.jpg' %}{% endif %}')">
+        <img src="{% if course.image %}{{ course.image.url }}{% else %}{% static 'img/placeholder.jpg' %}{% endif %}" alt="{{ course.title }}">
+      </div>
+      <div class="it-course-content">
+        <div class="it-course-text">
+          <p>{{ course.full_description|default:course.description }}</p>
+          {% if course.additional_info %}
+            <p>{{ course.additional_info }}</p>
+          {% endif %}
+        </div>
+        <div class="it-course-icons">
+          {% for tech in course.technologies.all %}
+            <span class="tech-icon {{ tech.css_class }}">{{ tech.name }}</span>
+          {% endfor %}
+        </div>
+        {% if course.image1 or course.image2 or course.image3 or course.image4 %}
+          <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+              {% if course.image1 %}
+                <div class="swiper-slide">
+                  <img src="{{ course.image1.url }}" alt="{{ course.title }} - Изображение 1" onclick="openModal('{{ course.image1.url }}')">
+                </div>
+              {% endif %}
+              {% if course.image2 %}
+                <div class="swiper-slide">
+                  <img src="{{ course.image2.url }}" alt="{{ course.title }} - Изображение 2" onclick="openModal('{{ course.image2.url }}')">
+                </div>
+              {% endif %}
+              {% if course.image3 %}
+                <div class="swiper-slide">
+                  <img src="{{ course.image3.url }}" alt="{{ course.title }} - Изображение 3" onclick="openModal('{{ course.image3.url }}')">
+                </div>
+              {% endif %}
+              {% if course.image4 %}
+                <div class="swiper-slide">
+                  <img src="{{ course.image4.url }}" alt="{{ course.title }} - Изображение 4" onclick="openModal('{{ course.image4.url }}')">
+                </div>
+              {% endif %}
+            </div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-pagination"></div>
+          </div>
+        {% endif %}
+        <a href="{% url 'home' %}#it-courses" class="it-course-button">Басты бетке</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Модальное окно -->
+  <div id="imageModal" class="modal">
+    <span class="modal-close" onclick="closeModal()">×</span>
+    <img class="modal-content" id="modalImage">
+  </div>
+
+  <!-- JavaScript для модального окна и Swiper -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script>
+    // Инициализация Swiper
+    var swiper = new Swiper(".mySwiper", {
+      slidesPerView: 1,
+      spaceBetween: 10,
+      loop: true,
+      autoplay: {
+        delay: 2500,
+        disableOnInteraction: false,
+      },
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+      breakpoints: {
+        768: {
+          slidesPerView: 2,
+          spaceBetween: 20,
+        },
+        1024: {
+          slidesPerView: 3,
+          spaceBetween: 30,
+        },
+      },
+    });
+
+    // Функции для модального окна
+    function openModal(imageSrc) {
+      const modal = document.getElementById('imageModal');
+      const modalImage = document.getElementById('modalImage');
+      modalImage.src = imageSrc;
+      modal.style.display = 'flex';
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('imageModal');
+      modal.style.display = 'none';
+    }
+
+    // Закрытие модального окна при клике вне изображения
+    window.onclick = function(event) {
+      const modal = document.getElementById('imageModal');
+      if (event.target === modal) {
+        closeModal();
+      }
+    }
+  </script>
+{% endblock %}
